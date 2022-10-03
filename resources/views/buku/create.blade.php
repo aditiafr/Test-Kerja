@@ -9,7 +9,8 @@
 
             <div class="mb-3">
                 <label for="id_buku" class="form-label">ID Buku</label>
-                <input type="text" class="form-control" id="id_buku" name="id_buku" placeholder="Masukan ID Buku">
+                <input type="text" class="form-control" id="id_buku" name="id_buku" placeholder="Masukan ID Buku" value="{{ $id_buku }}">
+                {{-- <div class="alert alert-info mt-1 mb-1">{{ $last }}</div> --}}
                 @error('title')
                     <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                 @enderror

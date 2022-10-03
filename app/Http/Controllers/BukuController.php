@@ -15,9 +15,11 @@ class BukuController extends Controller
      */
     public function index()
     {
+        $last = Buku::select('select * from tbl_buku order by id_buku desc limit 1 ');
         $buku = Buku::all();
         $data = [
-            'buku' => $buku
+            'buku' => $buku,
+            'last' => $last
         ];
         return view('buku/index', $data);
     }
@@ -29,7 +31,15 @@ class BukuController extends Controller
      */
     public function create()
     {
-        return view('buku/create');
+        $last = Buku::max('id_buku', 'desc');
+        $urutan = (int) substr($last, 3, 3);
+        $urutan++;
+        $huruf = 'B';
+        $id_buku = $huruf . sprintf("%03s", $urutan);
+        $data = [
+            'id_buku' => $id_buku
+        ];
+        return view('buku/create', $data);
     }
 
     /**
@@ -54,16 +64,23 @@ class BukuController extends Controller
         $buku->isbn = $request->isbn;
         $buku->pengarang = $request->pengarang;
 
+        // try {
+        //     $DataBuku = Buku::where('id_buku', $request->id_buku)->first();
+        //     if($DataBuku) :
+        //         return redirect('/buku/create')->with('error', 'ID Buku Sudah Terpakai!');
+        //     else :
+
+        //         $buku->save();
+        //         return redirect('/buku')->with('success', 'Data Buku Berhasi di Simpan');
+
+        //     endif;
+        // } catch (Exception $e) {
+        //     return redirect('/buku/create')->with('error', 'ID Buku Sudah Terpakai!');
+        // }
+
         try {
-            $DataBuku = Buku::where('id_buku', $request->id_buku)->first();
-            if($DataBuku) :
-                return redirect('/buku/create')->with('error', 'ID Buku Sudah Terpakai!');
-            else :
-
-                $buku->save();
-                return redirect('/buku')->with('success', 'Data Buku Berhasi di Simpan');
-
-            endif;
+            $buku->save();
+            return redirect('/buku')->with('success', 'Data Buku Berhasi di Simpan');
         } catch (Exception $e) {
             return redirect('/buku/create')->with('error', 'ID Buku Sudah Terpakai!');
         }
@@ -88,7 +105,7 @@ class BukuController extends Controller
      */
     public function edit($id)
     {
-        $buku = Buku::where('id', $id)->first();
+        $buku = Buku::where('id_buku', $id)->first();
         $data = [
             'buku' => $buku
         ];
@@ -106,7 +123,7 @@ class BukuController extends Controller
     {
 
         $buku = Buku::find($id);
-        $buku->update($request->except(['_token','submit']));
+        $buku->update($request->except(['_token', 'submit']));
         return redirect('/buku')->with('update', 'Data Buku Berhasil di Update!');
     }
 
@@ -118,7 +135,7 @@ class BukuController extends Controller
      */
     public function destroy($id)
     {
-        Buku::where('id', $id)->delete();
+        Buku::where('id_buku', $id)->delete();
         return redirect('/buku')->with('delete', 'Data Buku Behasil di Hapus!');
     }
 }

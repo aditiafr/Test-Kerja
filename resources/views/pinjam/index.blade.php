@@ -21,9 +21,9 @@
                 @foreach ($pinjam as $data)
                     <tr>
                         <td>{{ $data->id_pinjam }}</td>
-                        <td>{{ $data->tgl_pinjam }}</td>
-                        <td>{{ $data->tgl_batas }}</td>
-                        <td>{{ $data->tgl_kembali == '0' ? '-' : $data->tgl_kembali }}</td>
+                        <td>{{ date('d-M-Y', strtotime($data->tgl_pinjam)) }}</td>
+                        <td>{{ date('d-M-Y', strtotime($data->tgl_batas)) }}</td>
+                        <td>{{ $data->tgl_kembali == '0' ? '-' : date('d-M-Y', strtotime($data->tgl_kembali)) }}</td>
                         <td>{{ $data->status == '0' ? 'Terpinjam' : 'Kembali' }}</td>
                         <td>{{ $data->nama }}</td>
                         <td>{{ $data->judul }}</td>

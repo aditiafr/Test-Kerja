@@ -14,7 +14,7 @@
 
             <div class="mb-3">
                 <label for="nis" class="form-label">NIS Siswa</label>
-                <input type="number" class="form-control" id="nis" name="nis" placeholder="Masukan NIS Siswa">
+                <input type="number" class="form-control" id="nis" name="nis" placeholder="Masukan NIS Siswa" value="{{ $nis }}">
                 @error('title')
                     <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                 @enderror

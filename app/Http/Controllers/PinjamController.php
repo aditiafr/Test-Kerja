@@ -35,11 +35,18 @@ class PinjamController extends Controller
      */
     public function create()
     {
+        $last = Pinjam::max('id_pinjam', 'desc');
+        $urutan = (int) substr($last, 3, 3);
+        $urutan++;
+        $huruf = 'P';
+        $id_pinjam = $huruf . sprintf("%03s", $urutan);
+
         $siswa = Siswa::all();
         $buku = Buku::all();
         $data = [
             'siswa' => $siswa,
-            'buku' => $buku
+            'buku' => $buku,
+            'id_pinjam' => $id_pinjam
         ];
         return view('/pinjam/create', $data);
     }
@@ -70,20 +77,18 @@ class PinjamController extends Controller
         $pinjam->nis = $request->nis;
         $pinjam->id_buku = $request->id_buku;
 
-        // dd($pinjam);
-
         // $DataPinjam = Pinjam::where('id', $request->id)->first();
         // if ($DataPinjam) :
         //     return redirect('/pinjam/create')->with('error', 'Data ID Pinjam Sudah Ada!');
         // else :
         // endif;
 
-        $pinjam->save();
-        return redirect('/pinjam')->with('success', 'Data Pinjam Berhasi di Simpan');
-        // try {
-        // } catch (Exception $e) {
-        //     return redirect('/pinjam/create')->with('error', 'Data ID Pinjam Sudah Ada!');
-        // }
+        try {
+            $pinjam->save();
+            return redirect('/pinjam')->with('success', 'Data Pinjam Berhasi di Simpan');
+        } catch (Exception $e) {
+            return redirect('/pinjam/create')->with('error', 'Data ID Pinjam Sudah Ada!');
+        }
     }
 
     /**
@@ -106,8 +111,8 @@ class PinjamController extends Controller
     public function edit($id)
     {
         $pinjam = Pinjam::join('tbl_siswa', 'tbl_siswa.nis', '=', 'tbl_pinjam.nis')
-        ->join('tbl_buku', 'tbl_buku.id_buku', '=', 'tbl_pinjam.id_buku')
-        ->where('id_pinjam', $id)->first();
+            ->join('tbl_buku', 'tbl_buku.id_buku', '=', 'tbl_pinjam.id_buku')
+            ->where('id_pinjam', $id)->first();
         $siswa = Siswa::all();
         $buku = Buku::all();
         $data = [
@@ -143,7 +148,6 @@ class PinjamController extends Controller
         ]);
 
         return redirect('/pinjam')->with('update', 'Data Pinjam Behasil di Update!');
-
     }
 
     /**

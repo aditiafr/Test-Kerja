@@ -30,7 +30,15 @@ class SiswaController extends Controller
      */
     public function create()
     {
-        return view('siswa/create');
+        $last = Siswa::max('nis', 'desc');
+        // $urutan = (int) substr($last, 3, 3);
+        $last++;
+        // $huruf = 'B';
+        $nis = sprintf("%03s", $last);
+        $data = [
+            'nis' => $nis
+        ];
+        return view('siswa/create', $data);
     }
 
     /**

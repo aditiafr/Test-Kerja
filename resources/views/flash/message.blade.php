@@ -1,44 +1,41 @@
 @if (session('success'))
-    {{-- <div class="alert alert-success" role="alert">
-        {{ session('success') }}
-    </div> --}}
     <script>
         Swal.fire({
             icon: 'success',
             title: 'Success',
-            text: '{{ Session::get("success") }}',
+            text: '{{ Session::get('success') }}',
         })
     </script>
 @elseif(session('warning'))
-<script>
-    Swal.fire({
-        icon: 'warning',
-        title: 'Attetion!',
-        text: '{{ Session::get("warning") }}',
-    })
-</script>
+    <script>
+        Swal.fire({
+            icon: 'warning',
+            title: 'Attetion!',
+            text: '{{ Session::get('warning') }}',
+        })
+    </script>
 @elseif(session('info'))
-<script>
-    Swal.fire({
-        icon: 'info',
-        title: 'Success',
-        text: '{{ Session::get("info") }}',
-    })
-</script>
+    <script>
+        Swal.fire({
+            icon: 'info',
+            title: 'Success',
+            text: '{{ Session::get('info') }}',
+        })
+    </script>
 @elseif(session('error'))
-<script>
-    Swal.fire({
-        icon: 'error',
-        title: 'oopss..',
-        text: '{{ Session::get("error") }}',
-    })
-</script>
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'oopss..',
+            text: '{{ Session::get('error') }}',
+        })
+    </script>
 @elseif(session('update'))
     <script>
         Swal.fire({
             icon: 'success',
             title: 'Success',
-            text: '{{ Session::get("update") }}',
+            text: '{{ Session::get('update') }}',
         })
     </script>
 @elseif (session('delete'))
@@ -46,7 +43,7 @@
         Swal.fire({
             icon: 'success',
             title: 'Success',
-            text: '{{ Session::get("delete") }}',
+            text: '{{ Session::get('delete') }}',
         })
     </script>
 @endif

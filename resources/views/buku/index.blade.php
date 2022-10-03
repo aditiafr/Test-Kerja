@@ -9,7 +9,7 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>ID</th>
+                    <th>ID BUKU</th>
                     <th>JUDUL</th>
                     <th>ISBN</th>
                     <th>PENGARANG</th>
@@ -23,9 +23,9 @@
                         <td>{{ $data->judul }}</td>
                         <td>{{ $data->isbn }}</td>
                         <td>{{ $data->pengarang }}</td>
-                        <td><a class="btn btn-warning" href="{{ route('edit.buku', $data->id) }}">Edit</a></td>
+                        <td><a class="btn btn-warning" href="{{ route('buku.edit', $data->id_buku) }}">Edit</a></td>
                         <td>
-                            <form action="{{ route('buku.destroy', $data->id) }}" method="POST">
+                            <form action="{{ route('buku.destroy', $data->id_buku) }}" method="POST">
                                 @csrf
                                 @method('delete')
                                 <input class="btn btn-danger" type="submit" value="Hapus">

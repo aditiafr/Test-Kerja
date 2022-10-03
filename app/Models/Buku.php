@@ -11,5 +11,7 @@ class Buku extends Model
     protected $table = 'tbl_buku';
     protected $guarded = ['id'];
     public $timestamps = false;
-    // protected $primaryKey = 'id_buku';
+    protected $primaryKey = 'id_buku';
+    protected $keyType = 'string';
+    public $incrementing = false;
 }

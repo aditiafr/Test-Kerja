@@ -1,7 +1,7 @@
 @extends('auth.master')
 @section('content')
     <div class="container mt-4">
-        <form action="{{ route('buku.update', $buku->id) }}" method="POST">
+        <form action="{{ route('buku.update', $buku->id_buku) }}" method="POST">
             @csrf
             @method('put')
 

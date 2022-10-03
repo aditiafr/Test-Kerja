@@ -10,7 +10,7 @@
             <div class="mb-3">
                 <label for="id_pinjam" class="form-label">ID Pinjam Buku</label>
                 <input type="text" class="form-control" id="id_pinjam" name="id_pinjam"
-                    placeholder="Masukan ID Pinjam Buku">
+                    placeholder="Masukan ID Pinjam Buku" value="{{ $id_pinjam }}">
                 @error('title')
                     <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                 @enderror
