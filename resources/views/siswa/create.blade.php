@@ -9,7 +9,7 @@
                 {{ session('error') }}
             </div>
         @endif
-        <form action="{{ url('siswa/store') }}" method="POST" name="form-siswa" id="form-siswa">
+        <form action="{{ route('siswa.store') }}" method="POST" name="form-siswa" id="form-siswa">
             @csrf
 
             <div class="mb-3">
@@ -34,7 +34,7 @@
                 @enderror
             </div>
             <div class="mb-3">
-                <label for="tgl_lahir" class="form-label">Jenis Kelamin</label>
+                <label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>
                 <select class="form-control" name="jenis_kelamin" id="jenis_kelamin">
                     <option value="">- Pilih Jenis Kelamin -</option>
                     <option value="L">Laki - laki</option>

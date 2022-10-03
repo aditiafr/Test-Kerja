@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BukuController;
+use App\Http\Controllers\PinjamController;
 use App\Http\Controllers\SiswaController;
 use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Route;
@@ -16,23 +17,37 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 // Siswa
 
-Route::get('/siswa', [SiswaController::class, 'index']);
+Route::controller(SiswaController::class)->group(function () {
+    Route::get('/', 'index')->name('siswa');
 
-Route::get('/siswa/create', [SiswaController::class, 'create']);
+    Route::get('/siswa/create', 'create')->name('siswa.create');
 
-Route::post('/siswa/store', [SiswaController::class, 'store']);
+    Route::post('/siswa/store', 'store')->name('siswa.store');
 
-Route::get('/siswa/{id}/edit', [SiswaController::class, 'edit']);
+    Route::get('/siswa/{id}/edit', 'edit')->name('siswa.edit');
 
-Route::put('/siswa/{id}', [SiswaController::class, 'update']);
+    Route::put('/siswa/{id}', 'update')->name('siswa.update');
 
-Route::delete('/siswa/{id}', [SiswaController::class, 'destroy']);
+    Route::delete('/siswa/{id}', 'delete')->name('siswa.destroy');
+});
+
+// Route::get('/', [SiswaController::class, 'index'])->name('siswa');
+
+// Route::get('/siswa/create', [SiswaController::class, 'create']);
+
+// Route::post('/siswa/store', [SiswaController::class, 'store']);
+
+// Route::get('/siswa/{id}/edit', [SiswaController::class, 'edit']);
+
+// Route::put('/siswa/{id}', [SiswaController::class, 'update']);
+
+// Route::delete('/siswa/{id}', [SiswaController::class, 'destroy']);
 
 // Buku
 
@@ -47,3 +62,17 @@ Route::get('/buku/{id}/edit', [BukuController::class, 'edit'])->name('edit.buku'
 Route::put('/buku/{id}', [BukuController::class, 'update'])->name('buku.update');
 
 Route::delete('/buku/{id}', [BukuController::class, 'destroy'])->name('buku.destroy');
+
+// Pinjam
+
+Route::get('/pinjam', [PinjamController::class, 'index'])->name('pinjam');
+
+Route::get('/pinjam/create', [PinjamController::class, 'create'])->name('pinjam.create');
+
+Route::post('/pinjam/store', [PinjamController::class, 'store'])->name('pinjam.store');
+
+Route::get('/pinjam/{id}/edit', [PinjamController::class, 'edit'])->name('pinjam.edit');
+
+Route::put('/pinjam/{id}', [PinjamController::class, 'update'])->name('pinjam.update');
+
+Route::delete('/pinjam/{id}', [PinjamController::class, 'destroy'])->name('pinjam.destroy');

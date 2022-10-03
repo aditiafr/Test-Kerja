@@ -9,7 +9,7 @@
                 {{ session('error') }}
             </div>
         @endif
-        <form action="{{ url('siswa', $siswa->nis) }}" method="POST">
+        <form action="{{ route('siswa.update', $siswa->nis) }}" method="POST">
             @csrf
             @method('put')
 

@@ -58,7 +58,7 @@ class SiswaController extends Controller
         try {
             // Validate the value...
             $siswa->save();
-            return redirect('/siswa')->with('success', 'Data Siswa Behasil di Simpan!');
+            return redirect('/')->with('success', 'Data Siswa Behasil di Simpan!');
         } catch (Exception $e) {
             return redirect('/siswa/create')->with('error', 'NIS Siswa Sudah Tepakai!');
         }
@@ -109,7 +109,7 @@ class SiswaController extends Controller
 
         $siswa = Siswa::find($id);
         $siswa->update($request->except(['_token','submit']));
-        return redirect('/siswa')->with('update', 'Data Siswa Berhasil di Update!');
+        return redirect('/')->with('update', 'Data Siswa Berhasil di Update!');
     }
 
     /**
@@ -126,7 +126,7 @@ class SiswaController extends Controller
         // return redirect('/siswa');
 
         DB::table('tbl_siswa')->where('nis', $id)->delete();
-        return redirect('/siswa')->with('delete', 'Data Siswa Behasil di Hapus!');
+        return redirect('/')->with('delete', 'Data Siswa Behasil di Hapus!');
 
     }
 }
