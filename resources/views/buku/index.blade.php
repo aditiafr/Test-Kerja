@@ -50,7 +50,7 @@
                                             @csrf
                                             @method('delete')
                                             <div class="">
-                                                <p>Data ID {{ $data->id_buku }} Akan di Hapus!</p>
+                                                <p>Data ID Buku <b>{{ $data->id_buku }}</b> Dengan Judul <b>{{ $data->judul }}</b> Akan di Hapus!</p>
                                             </div>
                                     </div>
                                     <div class="modal-footer">

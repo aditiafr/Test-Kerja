@@ -62,7 +62,7 @@
                                             @csrf
                                             @method('delete')
                                             <div class="">
-                                                <p>Data ID {{$data->id_pinjam}} Akan di Hapus!</p>
+                                                <p>Data ID Pinjam <b>{{$data->id_pinjam}}</b> Akan di Hapus!</p>
                                             </div>
                                     </div>
                                     <div class="modal-footer">

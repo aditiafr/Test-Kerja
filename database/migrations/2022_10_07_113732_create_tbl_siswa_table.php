@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('tbl_siswa', function (Blueprint $table) {
             $table->string('nis', 10)->primary();
-            $table->string('nama');
+            $table->string('nama', 50);
             $table->date('tgl_lahir');
             $table->enum('jenis_kelamin', ['L', 'P']);
         });

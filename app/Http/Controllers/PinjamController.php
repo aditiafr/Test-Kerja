@@ -183,7 +183,7 @@ class PinjamController extends Controller
         //     'nama_bb' => $request->nama_bb,
         //     'stok' => $request->stok
         // ]);
-        if ($request->tgl_kembali == 0) :
+        if ($request->tgl_kembali == '0000-00-00') :
             Pinjam::where('id_pinjam', $request->id_pinjam)->update([
                 'id_pinjam' => $request->id_pinjam,
                 'tgl_pinjam' => $request->tgl_pinjam,
