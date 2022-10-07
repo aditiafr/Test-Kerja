@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BukuController;
+use App\Http\Controllers\KembaliController;
 use App\Http\Controllers\PinjamController;
 use App\Http\Controllers\SiswaController;
 use Illuminate\Support\Facades\Bus;
@@ -87,6 +88,12 @@ Route::controller(PinjamController::class)->group(function () {
 
     Route::get('/pinjam', 'index')->name('pinjam');
 
+    Route::get('/pinjam/tersedia', 'tersedia')->name('tersedia');
+
+    Route::get('/pinjam/kembali', 'kembali')->name('kembali');
+
+    Route::get('/pinjam/jumlah', 'jumlah')->name('jumlah');
+
     Route::get('/pinjam/create', 'create')->name('pinjam.create');
 
     Route::post('/pinjam/store', 'store')->name('pinjam.store');
@@ -95,9 +102,13 @@ Route::controller(PinjamController::class)->group(function () {
 
     Route::put('/pinjam/{id}', 'update')->name('pinjam.update');
 
-    Route::delete('/pinjam/{id}', 'destry')->name('pinjam.destroy');
+    Route::delete('/pinjam/{id}', 'destroy')->name('pinjam.destroy');
+
+    // Route::put('/pinjam/{id}', 'kembali')->name('pinjam.kembali');
 
 });
+
+Route::put('/kembali/{id}', [KembaliController::class, 'update'])->name('kembali.update');
 
 // Route::get('/pinjam', [PinjamController::class, 'index'])->name('pinjam');
 

@@ -19,10 +19,19 @@
             </div>
             <div class="mb-3">
                 <label for="tgl_batas" class="form-label">Tanggal Batas</label>
-                <input type="date" class="form-control" id="tgl_batas" name="tgl_batas" value="{{ $pinjam->tgl_pinjam }}">
+                <input type="date" class="form-control" id="tgl_batas" name="tgl_batas" value="{{ $pinjam->tgl_batas }}">
             </div>
-            <input type="hidden" class="form-control" id="tgl_kembali" name="tgl_kembali">
-            <input type="hidden" class="form-control" id="status" name="status" value="0">
+            <div class="mb-3">
+                <label for="tgl_kembali" class="form-label">Tanggal Kembali</label>
+                <input type="date" class="form-control" id="tgl_kembali" name="tgl_kembali" value="{{ $pinjam->tgl_kembali }}">
+            </div>
+            <div class="mb-3">
+                <label for="status" class="form-label">Status Pinjam</label>
+                <select class="form-control" name="status" id="status">
+                    <option value="0" @if ($pinjam->status == 0) selected @endif>Pinjam</option>
+                    <option value="1" @if ($pinjam->status == 1) selected @endif>Kembali</option>
+                </select>
+            </div>
             <div class="mb-3">
                 <label for="nis" class="form-label">Nama Siswa</label>
                 <select class="form-control js-example-basic-single" name="nis" id="nis">

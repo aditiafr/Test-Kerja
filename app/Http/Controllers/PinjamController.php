@@ -28,6 +28,50 @@ class PinjamController extends Controller
         return view('/pinjam/index', $data);
     }
 
+    public function tersedia()
+    {
+        $pinjam = Pinjam::join('tbl_buku', 'tbl_buku.id_buku', '=', 'tbl_pinjam.id_buku')
+            ->where('status', '1')
+            ->groupBy('isbn')
+            ->get();
+        $data = [
+            'pinjam' => $pinjam
+        ];
+        return view('/pinjam/tersedia', $data);
+    }
+
+    public function kembali()
+    {
+        $pinjam = DB::table('tbl_pinjam')
+            ->join('tbl_siswa', 'tbl_siswa.nis', '=', 'tbl_pinjam.nis')
+            ->join('tbl_buku', 'tbl_buku.id_buku', '=', 'tbl_pinjam.id_buku')
+            ->where('status', '0')
+            ->get();
+
+        $data = [
+            'pinjam' => $pinjam
+        ];
+
+        return view('/pinjam/kembali', $data);
+    }
+
+    public function jumlah()
+    {
+        $pinjam = Pinjam::select(Pinjam::raw('nama , count(nama) as jumlah'))
+            ->join('tbl_siswa', 'tbl_siswa.nis', '=', 'tbl_pinjam.nis')
+            ->join('tbl_buku', 'tbl_buku.id_buku', '=', 'tbl_pinjam.id_buku')
+            ->groupBy('nama')
+            ->get();
+
+        // dd($pinjam);
+
+        $data = [
+            'pinjam' => $pinjam
+        ];
+
+        return view('/pinjam/jumlah', $data);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -43,6 +87,8 @@ class PinjamController extends Controller
 
         $siswa = Siswa::all();
         $buku = Buku::all();
+        // $buku = Buku::join('tbl_pinjam', 'tbl_buku.id_buku', '=', 'tbl_pinjam.id_buku')->where('status' , '1')->get();
+
         $data = [
             'siswa' => $siswa,
             'buku' => $buku,
@@ -137,18 +183,44 @@ class PinjamController extends Controller
         //     'nama_bb' => $request->nama_bb,
         //     'stok' => $request->stok
         // ]);
-        $pinjam = Pinjam::where('id_pinjam', $request->id_pinjam)->update([
-            'id_pinjam' => $request->id_pinjam,
-            'tgl_pinjam' => $request->tgl_pinjam,
-            'tgl_batas' => $request->tgl_batas,
-            'tgl_kembali' => 0,
-            'status' => $request->status,
-            'nis' => $request->nis,
-            'id_buku' => $request->id_buku
-        ]);
+        if ($request->tgl_kembali == 0) :
+            Pinjam::where('id_pinjam', $request->id_pinjam)->update([
+                'id_pinjam' => $request->id_pinjam,
+                'tgl_pinjam' => $request->tgl_pinjam,
+                'tgl_batas' => $request->tgl_batas,
+                // 'tgl_kembali' => $request->tgl_kembali,
+                'status' => $request->status,
+                'nis' => $request->nis,
+                'id_buku' => $request->id_buku
+            ]);
+        else :
+            Pinjam::where('id_pinjam', $request->id_pinjam)->update([
+                'id_pinjam' => $request->id_pinjam,
+                'tgl_pinjam' => $request->tgl_pinjam,
+                'tgl_batas' => $request->tgl_batas,
+                'tgl_kembali' => $request->tgl_kembali,
+                'status' => $request->status,
+                'nis' => $request->nis,
+                'id_buku' => $request->id_buku
+            ]);
+        endif;
 
         return redirect('/pinjam')->with('update', 'Data Pinjam Behasil di Update!');
     }
+
+    // public function kembali(Request $request, $id)
+    // {
+    //     $pinjam = Pinjam::where('id_pinjam', $request->id_pinjam)->update([
+    //         // 'id_pinjam' => $id,
+    //         'tgl_kembali' => date('Y-m-d')
+    //     ]);
+
+    //     if ($pinjam) :
+    //         return redirect('/pinjam')->with('update', 'Buku Sudah di Kembalikan');
+    //     else :
+    //         return redirect('/pinjam')->with('error', 'Gagal!');
+    //     endif;
+    // }
 
     /**
      * Remove the specified resource from storage.
