@@ -15,7 +15,7 @@
 
             <div class="mb-3">
                 <label for="nis" class="form-label">NIS Siswa</label>
-                <input type="number" class="form-control" id="nis" name="nis" value="{{ $siswa->nis }}" disabled>
+                <input type="number" class="form-control" id="nis" name="nis" value="{{ $siswa->nis }}">
                 @error('title')
                     <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                 @enderror

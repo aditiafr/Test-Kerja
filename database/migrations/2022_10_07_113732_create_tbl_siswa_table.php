@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tbl_buku', function (Blueprint $table) {
-            $table->string('id_buku', 10)->primary();
-            $table->string('judul', 50);
-            $table->integer('isbn');
-            $table->string('pengarang', 50);
+        Schema::create('tbl_siswa', function (Blueprint $table) {
+            $table->string('nis', 10)->primary();
+            $table->string('nama');
+            $table->date('tgl_lahir');
+            $table->enum('jenis_kelamin', ['L', 'P']);
         });
     }
 
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tbl_buku');
+        Schema::dropIfExists('tbl_siswa');
     }
 };

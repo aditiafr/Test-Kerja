@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tbl_pinjam', function (Blueprint $table) {
-            $table->string('id', 10)->primary();
+            $table->string('id_pinjam', 10)->primary();
             $table->date('tgl_pinjam');
             $table->date('tgl_batas');
             $table->date('tgl_kembali');
